@@ -17,7 +17,6 @@ class SubjectImporter extends Importer
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
-            ImportColumn::make('description'),
         ];
     }
 

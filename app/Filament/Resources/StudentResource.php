@@ -47,25 +47,29 @@ class StudentResource extends Resource
                         $query->where('role', 'siswa');
                     })
                     ->live(true)
-                    ->afterStateUpdated(fn (Set $set, ?string $state) => $set('name', User::find($state)->name))
+                    ->afterStateUpdated(fn(Set $set, ?string $state) => $set('name', User::find($state)->name))
                     ->required(),
                 Forms\Components\Select::make('classroom_id')
+                    ->label('Kelas')
                     ->relationship('classroom', 'name')
                     ->live(true),
                 Forms\Components\TextInput::make('name')
-                    ->hidden(fn (Get $get) => ! $get('user_id'))
+                    ->hidden(fn(Get $get) => ! $get('user_id'))
                     ->required(),
                 Forms\Components\Radio::make('gender')
                     ->label('Jenis Kelamin')
                     ->options(['l' => 'Laki-laki', 'p' => 'Perempuan'])
                     ->required(),
                 Forms\Components\DatePicker::make('birthday')
+                    ->label('Tanggal Lahir')
                     ->locale('id')
                     ->required(),
                 Forms\Components\TextInput::make('nisn')
+                    ->label('NISN')
                     ->numeric()
                     ->required(),
                 Forms\Components\TextInput::make('phone')
+                    ->label('Nomor Telepon')
                     ->tel(),
             ]);
     }
@@ -74,16 +78,23 @@ class StudentResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nisn')
+                    ->label('NISN')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('class')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('gender')
+                    ->formatStateUsing(fn($state) => ['l' => 'Laki-laki', 'p' => 'Perempuan'][$state] ?? null)
+                    ->label('Jenis Kelamin'),
+                Tables\Columns\TextColumn::make('birthday')
+                    ->date('d F Y')
+                    ->label('Tanggal Lahir'),
+                Tables\Columns\TextColumn::make('classroom.name')
+                    ->label('Kelas')
+                    ->numeric(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->label('Nomor Telepon')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

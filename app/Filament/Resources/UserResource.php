@@ -35,6 +35,8 @@ class UserResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama Pengguna')
+                    ->hint('Catatan: Silakan pakai nama lengkap')
                     ->required(),
                 Forms\Components\TextInput::make('email')
                     ->email()
@@ -52,15 +54,11 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label('Nama Pengguna')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('role')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -73,7 +71,12 @@ class UserResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('role')
+                    ->options([
+                        'admin' => 'admin',
+                        'guru' => 'guru',
+                        'siswa' => 'siswa',
+                    ])
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

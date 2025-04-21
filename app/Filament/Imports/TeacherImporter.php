@@ -18,18 +18,22 @@ class TeacherImporter extends Importer
                 ->requiredMapping()
                 ->relationship()
                 ->rules(['required']),
+            ImportColumn::make('subject')
+                ->requiredMapping()
+                ->relationship()
+                ->rules(['required']),
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
-            ImportColumn::make('nip')
+            ImportColumn::make('nuptk')
                 ->requiredMapping()
                 ->rules(['required']),
-            ImportColumn::make('phone')
+            ImportColumn::make('gender')
                 ->requiredMapping()
                 ->rules(['required']),
-            ImportColumn::make('subject')
+            ImportColumn::make('birthday')
                 ->requiredMapping()
-                ->rules(['required']),
+                ->rules(['required', 'date']),
         ];
     }
 

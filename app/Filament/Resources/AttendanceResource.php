@@ -44,7 +44,13 @@ class AttendanceResource extends Resource
                     ->required(),
                 Forms\Components\DatePicker::make('date')
                     ->required(),
-                Forms\Components\TextInput::make('status')
+                Forms\Components\Select::make('status')
+                    ->options([
+                        'hadir' => 'Hadir',
+                        'izin' => 'Izin',
+                        'sakit' => 'Sakit',
+                        'alpha' => 'Alpha',
+                    ])
                     ->required(),
             ]);
     }
@@ -54,12 +60,20 @@ class AttendanceResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('student.name')
+                    ->label('Nama Siswa')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('date')
-                    ->date()
+                    ->label('Tanggal Absen')
+                    ->date('d F Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
+                    ->formatStateUsing(fn($state) => [
+                        'hadir' => 'Hadir',
+                        'izin' => 'Izin',
+                        'sakit' => 'Sakit',
+                        'alpha' => 'Alpha',
+                    ][$state])
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

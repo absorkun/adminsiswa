@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('class');
             $table->foreignId('subject_id');
             $table->foreignId('teacher_id');
+            $table->foreignId('classroom_id')->nullable()->constrained()->nullOnDelete();
             $table->enum('day', ['senin', 'selasa', 'rabu', 'kamis', 'jumat']);
             $table->time('time');
             $table->timestamps();

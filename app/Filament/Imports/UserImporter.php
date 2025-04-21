@@ -14,14 +14,14 @@ class UserImporter extends Importer
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('id')
-                ->rules(['required']),
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
             ImportColumn::make('email')
                 ->requiredMapping()
                 ->rules(['required', 'email']),
+            ImportColumn::make('email_verified_at')
+                ->rules(['email', 'datetime']),
             ImportColumn::make('password')
                 ->requiredMapping()
                 ->rules(['required']),

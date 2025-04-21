@@ -17,9 +17,11 @@ class StudentExporter extends Exporter
             ExportColumn::make('id')
                 ->label('ID'),
             ExportColumn::make('user.name'),
+            ExportColumn::make('classroom.name'),
             ExportColumn::make('name'),
             ExportColumn::make('nisn'),
-            ExportColumn::make('class'),
+            ExportColumn::make('gender'),
+            ExportColumn::make('birthday'),
             ExportColumn::make('phone'),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),

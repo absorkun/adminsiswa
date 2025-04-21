@@ -39,17 +39,25 @@ class ScheduleResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('class')
-                    ->required(),
                 Forms\Components\Select::make('subject_id')
                     ->relationship('subject', 'name')
                     ->required(),
                 Forms\Components\Select::make('teacher_id')
                     ->relationship('teacher', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('day')
+                Forms\Components\Select::make('classroom_id')
+                    ->relationship('classroom', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('time')
+                Forms\Components\Select::make('day')
+                    ->options([
+                        'senin' => 'Senin', 
+                        'selasa' => 'Selasa', 
+                        'rabu' => 'Rabu', 
+                        'kamis' => 'Kamis', 
+                        'jumat' => 'Jumat',
+                    ])
+                    ->required(),
+                Forms\Components\TimePicker::make('time')
                     ->required(),
             ]);
     }

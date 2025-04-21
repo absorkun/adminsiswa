@@ -2,6 +2,8 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\ClassroomExporter;
+use App\Filament\Imports\ClassroomImporter;
 use App\Filament\Resources\ClassroomResource\Pages;
 use App\Filament\Resources\ClassroomResource\RelationManagers;
 use App\Models\Classroom;
@@ -9,6 +11,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -24,8 +28,11 @@ class ClassroomResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama/Kode Kelas')
                     ->required(),
                 Forms\Components\Select::make('teacher_id')
+                    ->label('Wali Kelas')
+                    ->hint('Catatan: Boleh tidak diisi')
                     ->relationship('teacher', 'name'),
             ]);
     }
@@ -54,6 +61,13 @@ class ClassroomResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->fileDisk('public')
+                    ->exporter(ClassroomExporter::class),
+                ImportAction::make()
+                    ->importer(ClassroomImporter::class),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

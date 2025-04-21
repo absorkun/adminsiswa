@@ -18,18 +18,21 @@ class StudentImporter extends Importer
                 ->requiredMapping()
                 ->relationship()
                 ->rules(['required']),
+            ImportColumn::make('classroom')
+                ->relationship(),
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
             ImportColumn::make('nisn')
                 ->requiredMapping()
                 ->rules(['required']),
-            ImportColumn::make('class')
+            ImportColumn::make('gender')
                 ->requiredMapping()
                 ->rules(['required']),
-            ImportColumn::make('phone')
+            ImportColumn::make('birthday')
                 ->requiredMapping()
-                ->rules(['required']),
+                ->rules(['required', 'date']),
+            ImportColumn::make('phone'),
         ];
     }
 

@@ -17,7 +17,6 @@ class SubjectExporter extends Exporter
             ExportColumn::make('id')
                 ->label('ID'),
             ExportColumn::make('name'),
-            ExportColumn::make('description'),
             ExportColumn::make('created_at'),
             ExportColumn::make('updated_at'),
         ];

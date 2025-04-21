@@ -41,8 +41,8 @@ class SubjectResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
+                    ->label('Nama Mata Pelajaran')
                     ->required(),
-                Forms\Components\TextInput::make('description'),
             ]);
     }
 
@@ -51,8 +51,7 @@ class SubjectResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('description')
+                    ->label('Nama Mata Pelajaran')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

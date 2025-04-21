@@ -16,9 +16,9 @@ class ScheduleExporter extends Exporter
         return [
             ExportColumn::make('id')
                 ->label('ID'),
-            ExportColumn::make('class'),
             ExportColumn::make('subject.name'),
             ExportColumn::make('teacher.name'),
+            ExportColumn::make('classroom.name'),
             ExportColumn::make('day'),
             ExportColumn::make('time'),
             ExportColumn::make('created_at'),

@@ -12,9 +12,9 @@ class Schedule extends Model
     use HasFactory;
 
     protected $fillable = [
-        'class',
         'subject_id',
         'teacher_id',
+        'classroom_id',
         'day',
         'time',
     ];
@@ -27,6 +27,11 @@ class Schedule extends Model
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
+    }
+
+    public function classroom(): BelongsTo
+    {
+        return $this->belongsTo(Classroom::class);
     }
 
 }

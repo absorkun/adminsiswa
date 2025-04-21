@@ -51,18 +51,21 @@ class TeacherResource extends Resource
                     ->afterStateUpdated(fn(Set $set, ?string $state) => $set('name', User::find($state)->name))
                     ->required(),
                 Forms\Components\TextInput::make('name')
-                    ->hidden(fn (Get $get) => ! $get('user_id'))
+                    ->hidden(fn(Get $get) => ! $get('user_id'))
                     ->required(),
                 Forms\Components\TextInput::make('nuptk')
+                    ->label('NUPTK/NIK')
                     ->required(),
                 Forms\Components\Radio::make('gender')
                     ->label('Jenis Kelamin')
                     ->options(['l' => 'Laki-laki', 'p' => 'Perempuan'])
                     ->required(),
                 Forms\Components\DatePicker::make('birthday')
+                    ->label('Tanggal Lahir')
                     ->locale('id')
                     ->required(),
                 Forms\Components\Select::make('subject_id')
+                    ->label('Mata Pelajaran')
                     ->relationship('subject', 'name')
                     ->searchable()
                     ->preload()
@@ -74,16 +77,18 @@ class TeacherResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('user.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('nip')
+                Tables\Columns\TextColumn::make('nuptk')
+                    ->label('NUPTK/NIK')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('phone')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('subject')
+                Tables\Columns\TextColumn::make('birthday')
+                    ->label('Tanggal Lahir')
+                    ->date('d F Y'),
+                Tables\Columns\TextColumn::make('gender')
+                    ->formatStateUsing(fn($state) => ['l' => 'Laki-laki', 'p' => 'Perempuan'][$state] ?? null)
+                    ->label('Jenis Kelamin'),
+                Tables\Columns\TextColumn::make('subject.name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

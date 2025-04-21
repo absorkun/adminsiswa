@@ -2,50 +2,39 @@
 
 namespace App\Filament\Imports;
 
-use App\Models\Schedule;
+use App\Models\Classroom;
 use Filament\Actions\Imports\ImportColumn;
 use Filament\Actions\Imports\Importer;
 use Filament\Actions\Imports\Models\Import;
 
-class ScheduleImporter extends Importer
+class ClassroomImporter extends Importer
 {
-    protected static ?string $model = Schedule::class;
+    protected static ?string $model = Classroom::class;
 
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('subject')
-                ->requiredMapping()
-                ->relationship()
-                ->rules(['required']),
             ImportColumn::make('teacher')
-                ->requiredMapping()
-                ->relationship()
-                ->rules(['required']),
-            ImportColumn::make('classroom')
                 ->relationship(),
-            ImportColumn::make('day')
-                ->requiredMapping()
-                ->rules(['required']),
-            ImportColumn::make('time')
+            ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
         ];
     }
 
-    public function resolveRecord(): ?Schedule
+    public function resolveRecord(): ?Classroom
     {
-        // return Schedule::firstOrNew([
+        // return Classroom::firstOrNew([
         //     // Update existing records, matching them by `$this->data['column_name']`
         //     'email' => $this->data['email'],
         // ]);
 
-        return new Schedule();
+        return new Classroom();
     }
 
     public static function getCompletedNotificationBody(Import $import): string
     {
-        $body = 'Your schedule import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
+        $body = 'Your classroom import has completed and ' . number_format($import->successful_rows) . ' ' . str('row')->plural($import->successful_rows) . ' imported.';
 
         if ($failedRowsCount = $import->getFailedRowsCount()) {
             $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to import.';
