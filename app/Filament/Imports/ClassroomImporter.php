@@ -14,11 +14,14 @@ class ClassroomImporter extends Importer
     public static function getColumns(): array
     {
         return [
-            ImportColumn::make('teacher')
-                ->relationship(),
+            ImportColumn::make('id')
+                ->requiredMapping()
+                ->rules(['required']),
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
+            ImportColumn::make('teacher')
+                ->relationship(),
         ];
     }
 

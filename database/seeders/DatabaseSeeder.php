@@ -25,25 +25,25 @@ class DatabaseSeeder extends Seeder
             'role' => 'admin',
         ]);
 
-        $subjects = [
-            ['name' => 'Al Qur`an Hadis'],
-            ['name' => 'Akidah Akhlak'],
-            ['name' => 'Fikih'],
-            ['name' => 'Sejarah Kebudayaan Islam'],
-            ['name' => 'Pendidikan Pancasila dan Kewarganegaraan'],
-            ['name' => 'Bahasa Indonesia'],
-            ['name' => 'Bahasa Arab'],
-            ['name' => 'Matematika'],
-            ['name' => 'Ilmu Pengetahuan Alam'],
-            ['name' => 'Ilmu Pengetahuan Sosial'],
-            ['name' => 'Bahasa Inggris'],
-            ['name' => 'Seni Budaya'],
-            ['name' => 'Pendidikan Jasmani, Olahraga dan Kesehatan'],
-            ['name' => 'Informatika'],
-            ['name' => 'Baca Tulis Al-Qur`an'],
-        ];
+        // $subjects = [
+        //     ['name' => 'Al Qur`an Hadis'],
+        //     ['name' => 'Akidah Akhlak'],
+        //     ['name' => 'Fikih'],
+        //     ['name' => 'Sejarah Kebudayaan Islam'],
+        //     ['name' => 'Pendidikan Pancasila dan Kewarganegaraan'],
+        //     ['name' => 'Bahasa Indonesia'],
+        //     ['name' => 'Bahasa Arab'],
+        //     ['name' => 'Matematika'],
+        //     ['name' => 'Ilmu Pengetahuan Alam'],
+        //     ['name' => 'Ilmu Pengetahuan Sosial'],
+        //     ['name' => 'Bahasa Inggris'],
+        //     ['name' => 'Seni Budaya'],
+        //     ['name' => 'Pendidikan Jasmani, Olahraga dan Kesehatan'],
+        //     ['name' => 'Informatika'],
+        //     ['name' => 'Baca Tulis Al-Qur`an'],
+        // ];
 
-        Subject::insert($subjects);
+        // Subject::insert($subjects);
 
 
         // User::factory(10)->create();

@@ -14,6 +14,9 @@ class SubjectImporter extends Importer
     public static function getColumns(): array
     {
         return [
+            ImportColumn::make('id')
+                ->requiredMapping()
+                ->rules(['required']),
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),

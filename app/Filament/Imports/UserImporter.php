@@ -14,14 +14,17 @@ class UserImporter extends Importer
     public static function getColumns(): array
     {
         return [
+            ImportColumn::make('id')
+                ->requiredMapping()
+                ->rules(['required']),
             ImportColumn::make('name')
                 ->requiredMapping()
                 ->rules(['required']),
             ImportColumn::make('email')
                 ->requiredMapping()
                 ->rules(['required', 'email']),
-            ImportColumn::make('email_verified_at')
-                ->rules(['email', 'datetime']),
+            // ImportColumn::make('email_verified_at')
+            //     ->rules(['email', 'datetime']),
             ImportColumn::make('password')
                 ->requiredMapping()
                 ->rules(['required']),
@@ -33,12 +36,12 @@ class UserImporter extends Importer
 
     public function resolveRecord(): ?User
     {
-        // return User::firstOrNew([
-        //     // Update existing records, matching them by `$this->data['column_name']`
-        //     'email' => $this->data['email'],
-        // ]);
+        return User::firstOrNew([
+            // Update existing records, matching them by `$this->data['column_name']`
+            'email' => $this->data['email'],
+        ]);
 
-        return new User();
+        // return new User();
     }
 
     public static function getCompletedNotificationBody(Import $import): string
