@@ -34,12 +34,15 @@ class GradeImporter extends Importer
 
     public function resolveRecord(): ?Grade
     {
-        // return Grade::firstOrNew([
-        //     // Update existing records, matching them by `$this->data['column_name']`
-        //     'email' => $this->data['email'],
-        // ]);
-
-        return new Grade();
+        $grade = Grade::firstOrNew([
+            'subject_id' => $this->data['subject_id'],
+            'term' => $this->data['term'],
+        ]);
+    
+        $grade->grade = $this->data['grade'];
+        $grade->save();
+    
+        return $grade;
     }
 
     public static function getCompletedNotificationBody(Import $import): string

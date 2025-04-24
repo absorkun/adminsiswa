@@ -15,6 +15,7 @@ use Filament\Tables\Actions\ExportAction;
 use Filament\Tables\Actions\ImportAction;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Facades\Auth;
 
@@ -34,7 +35,11 @@ class ScheduleResource extends Resource
     {
         return in_array(Auth::user()->role, ['admin', 'guru']);
     }
-
+    
+    public static function canEdit(Model $record): bool
+    {
+        return in_array(Auth::user()->role, ['admin', 'guru']);
+    }
     public static function form(Form $form): Form
     {
         return $form

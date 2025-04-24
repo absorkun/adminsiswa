@@ -56,6 +56,7 @@ class UserResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Pengguna')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
